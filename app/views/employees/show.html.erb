@@ -1,3 +1,4 @@
 <h1>Employee info</h1>
 <p>First name: <%= @employee["firstName"] %></p>
 <p>Last name: <%= @employee["lastName"] %></p>
+<%= link_to "Destroy employee", "/employees/#{@employee['id']}", method: :delete %>
