@@ -25,4 +25,23 @@ class EmployeesController < ApplicationController
     @employee = Unirest.get("http://localhost:3000/api/v1/employees/#{params[:id]}.json").body
     render 'show.html.erb'
   end
+
+  def edit
+    @employee = Unirest.get("http://localhost:3000/api/v1/employees/#{params[:id]}.json").body
+    render 'edit.html.erb'
+  end
+
+  def update
+    @employee = Unirest.patch(
+      "http://localhost:3000/api/v1/employees/#{params[:id]}.json",
+      headers: { "Accept" => "application/json" },
+      parameters: {
+        first_name: params[:form_input_first_name],
+        last_name: params[:form_input_last_name],
+        email: params[:form_input_email],
+        birthdate: params[:form_input_birthdate]
+      }
+    ).body
+    redirect_to "/employees/#{@employee['id']}"
+  end
 end
