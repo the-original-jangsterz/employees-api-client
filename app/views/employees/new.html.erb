@@ -1,0 +1,16 @@
+<h1>Create a new employee:</h1>
+<%= form_tag "/employees", method: :post do %>
+  <div>
+    <%= label_tag :form_input_first_name %>
+    <%= text_field_tag :form_input_first_name %>
+  </div>
+  <div>
+    <%= label_tag :form_input_last_name %>
+    <%= text_field_tag :form_input_last_name %>
+  </div>
+  <div>
+    <%= label_tag :form_input_email %>
+    <%= text_field_tag :form_input_email %>
+  </div>
+  <%= submit_tag "Create employee" %>
+<% end %>
