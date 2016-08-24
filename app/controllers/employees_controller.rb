@@ -31,11 +31,7 @@ class EmployeesController < ApplicationController
   end
 
   def show
-    employee_hash = Unirest.get(
-      "#{ENV['API_BASE_URL']}/employees/#{params[:id]}.json",
-      headers: HEADERS
-    ).body
-    @employee = Employee.new(employee_hash)
+    @employee = Employee.find_by(id: params[:id])
     render 'show.html.erb'
   end
 
