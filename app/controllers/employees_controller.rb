@@ -2,10 +2,14 @@ class EmployeesController < ApplicationController
   HEADERS = { "Accept" => "application/json", "Authorization" => "Token token=#{ENV['API_KEY']}", "X-User-Email" => ENV['API_EMAIL'] }
 
   def index
-    @employees = Unirest.get(
+    employee_hashes = Unirest.get(
       "#{ENV['API_BASE_URL']}/employees.json",
       headers: HEADERS
     ).body
+    @employees = []
+    employee_hashes.each do |employee_hash|
+      @employees << Employee.new(employee_hash)
+    end
     render 'index.html.erb'
   end
 
