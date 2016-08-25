@@ -12,6 +12,18 @@ class Employee
     @addresses = input_options["addresses"]
   end
 
+  def self.all
+    employee_hashes = Unirest.get(
+      "#{ENV['API_BASE_URL']}/employees.json",
+      headers: HEADERS
+    ).body
+    employees = []
+    employee_hashes.each do |employee_hash|
+      employees << Employee.new(employee_hash)
+    end
+    employees
+  end
+
   def self.find_by(input_options)
     id = input_options[:id]
     employee_hash = Unirest.get(
