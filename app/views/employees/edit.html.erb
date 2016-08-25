@@ -1,20 +1,20 @@
 <h1>Update the employee:</h1>
-<%= form_tag "/employees/#{@employee['id']}", method: :patch do %>
+<%= form_tag "/employees/#{@employee.id}", method: :patch do %>
   <div>
     <%= label_tag :form_input_first_name %>
-    <%= text_field_tag :form_input_first_name, @employee['firstName'] %>
+    <%= text_field_tag :form_input_first_name, @employee.first_name %>
   </div>
   <div>
     <%= label_tag :form_input_last_name %>
-    <%= text_field_tag :form_input_last_name, @employee['lastName'] %>
+    <%= text_field_tag :form_input_last_name, @employee.last_name %>
   </div>
   <div>
     <%= label_tag :form_input_email %>
-    <%= text_field_tag :form_input_email, @employee['email'] %>
+    <%= text_field_tag :form_input_email, @employee.email %>
   </div>
   <div>
     <%= label_tag :form_input_birthdate %>
-    <%= text_field_tag :form_input_birthdate, @employee['birthdate'] %>
+    <%= text_field_tag :form_input_birthdate, @employee.birthdate %>
   </div>
   <%= submit_tag "Update employee" %>
 <% end %>

@@ -12,6 +12,22 @@ class Employee
     @addresses = input_options["addresses"]
   end
 
+  def update(input_options)
+    employee_hash = Unirest.patch(
+      "#{ENV['API_BASE_URL']}/employees/#{id}.json",
+      headers: HEADERS,
+      parameters: input_options
+    ).body
+    Employee.new(employee_hash)
+  end
+
+  def destroy
+    Unirest.delete(
+      "#{ENV['API_BASE_URL']}/employees/#{id}.json",
+      headers: HEADERS
+    )
+  end
+
   def self.all
     employee_hashes = Unirest.get(
       "#{ENV['API_BASE_URL']}/employees.json",
@@ -29,6 +45,15 @@ class Employee
     employee_hash = Unirest.get(
       "#{ENV['API_BASE_URL']}/employees/#{id}.json",
       headers: HEADERS
+    ).body
+    Employee.new(employee_hash)
+  end
+
+  def self.create(input_options)
+    employee_hash = Unirest.post(
+      "#{ENV['API_BASE_URL']}/employees.json",
+      headers: HEADERS,
+      parameters: input_options
     ).body
     Employee.new(employee_hash)
   end
